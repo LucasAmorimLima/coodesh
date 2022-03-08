@@ -34,7 +34,7 @@ describe('listArticlesById', () => {
             }
         )
     })
-    it('should throw BookNotFoundError if id is not found', async () => {
+    it('should throw ArticleNotFoundError if id is not found', async () => {
         const { sut, articlesRepositoryStub } = makeSut()
         jest.spyOn(articlesRepositoryStub, 'listById').mockReturnValueOnce(Promise.resolve(null))
         const promise = sut.execute(0)//wrong ig
