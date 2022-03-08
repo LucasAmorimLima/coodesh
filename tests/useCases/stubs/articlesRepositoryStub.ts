@@ -53,7 +53,7 @@ export class ArticlesRepositoryStub implements ArticlesRepository {
             ]
         )
     }
-    listById(id: number): Promise<Articles> {
+    listById(id: number): Promise<Articles | null> {
         return Promise.resolve(
             {
                 id: 14167,

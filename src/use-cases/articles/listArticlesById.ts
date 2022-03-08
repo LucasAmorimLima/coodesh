@@ -1,4 +1,5 @@
 import { Articles } from "../../domain/articles";
+import { ArticlesNotFoundError } from "../error/articlesNotFoundError";
 import { ArticlesRepository } from "../repositories/articlesRepository";
 
 export class ListArticlesbyId {
