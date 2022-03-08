@@ -6,7 +6,7 @@ export class CreateArticles {
     constructor(
         private articlesRepository: ArticlesRepository
     ) {}
-    async excute(article: CreateArticlesDto): Promise<Articles>{
+    async execute(article: CreateArticlesDto): Promise<Articles>{
         const newArticle  = await this.articlesRepository.create(article)
 
         return newArticle

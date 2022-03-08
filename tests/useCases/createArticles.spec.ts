@@ -21,7 +21,7 @@ describe('CreateArticles', () => {
             launches: [],
             events: []
         }
-        const result = await createArticlesUseCase.excute(article)
+        const result = await createArticlesUseCase.execute(article)
         expect(result.id).toBe(article.id)
     })
 })
