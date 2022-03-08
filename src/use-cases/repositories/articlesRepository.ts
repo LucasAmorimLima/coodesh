@@ -4,7 +4,7 @@ import { CreateArticlesDto } from '../dto/createArticlesDto'
 export interface ArticlesRepository {
   create (articles: CreateArticlesDto): Promise<Articles>
   list (): Promise<Articles[]>
-  listById (id: string): Promise<Articles>
+  listById (id: number): Promise<Articles>
   update (articles: Articles): Promise<Articles>
-  delete (id: string): Promise<string>
+  delete (id: number): Promise<string>
 }
