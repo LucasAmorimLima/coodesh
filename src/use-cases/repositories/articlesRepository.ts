@@ -6,5 +6,5 @@ export interface ArticlesRepository {
   list (): Promise<Articles[]>
   listById (id: number): Promise<Articles | null>
   update (articles: Articles): Promise<Articles>
-  delete (id: number): Promise<string>
+  delete (id: number): Promise<string | null>
 }

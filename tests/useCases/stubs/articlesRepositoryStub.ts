@@ -87,7 +87,7 @@ export class ArticlesRepositoryStub implements ArticlesRepository {
             }
         )
     }
-    delete(id: number): Promise<string> {
+    delete(id: number): Promise<string | null> {
         return Promise.resolve("Article deleted successfully")
     }
 }

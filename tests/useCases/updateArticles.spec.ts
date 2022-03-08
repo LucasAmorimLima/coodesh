@@ -49,8 +49,7 @@ describe('listArticlesById', () => {
             events: []
         }
         jest.spyOn(articlesRepositoryStub, 'listById').mockReturnValueOnce(Promise.resolve(null))
-        const promise = sut.execute(article)//wrong ig
-
+        const promise = sut.execute(article)
         await expect(promise).rejects.toThrow(ArticlesNotFoundError)
     })
 })

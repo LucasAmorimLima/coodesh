@@ -10,7 +10,6 @@ export class ListArticlesbyId {
         const article = await this.articlesRepository.listById(id)
         if (!article) {
             throw new ArticlesNotFoundError("Article id not Found");
-            
         }
         return article
     }
