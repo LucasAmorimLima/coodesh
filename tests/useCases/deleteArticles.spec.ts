@@ -15,7 +15,7 @@ const makeSut = (): sutTypes => {
         articlesRepositoryStub
     }
 }
-describe('listArticlesById', () => {
+describe('deleteArticlesById', () => {
     it("shoud call bookRepository with corrects params", async () => {
         const { sut } = makeSut()
         const articleId = 14167 

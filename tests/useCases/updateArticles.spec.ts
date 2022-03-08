@@ -14,7 +14,7 @@ const makeSut = (): sutTypes => {
         articlesRepositoryStub
     }
 }
-describe('listArticlesById', () => {
+describe('UpdateArticlesById', () => {
     it("shoud call bookRepository with corrects params", async () => {
         const { sut } = makeSut()
         const article = {
