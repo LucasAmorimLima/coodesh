@@ -1,0 +1,24 @@
+Primeira coisa é pensar na nossa aplicação de forma desacoplada, 
+entendendo o problema da aplicação, fazendo isso teremos algumas entidades e alguns verbos de aplicação
+baseado nessas informações traçaremos a base da aplicação
+
+nessa parte são definidas:
+
+Entidades 
+UseCases
+e se necessário Repositories
+
+Depois de cada processo ser desenvolvido, um teste deve ser aplicado, de modo a garantir a coerência
+do que foi produzido até o momento
+
+hora de partir pra infra, controllers e por ultimo o main
+os controllers são onde os dados manipulados pelo UseCases vão ser exibidos, vale lembrar que é somente a extrutura de dados
+não comtêm frameworks como exporess
+no infra serão implementados os Repositories e qualquer requisição a mais que o sistema pedir,
+por expemplo: 
+    envio de email,
+    criptografia de dados,
+    leitura de QrCode
+no main todas essas camadas vão se conectar por meio de factories, como no sistema foi excolhido o exporess
+oo reteamento vai ficar por conta dele 
+
