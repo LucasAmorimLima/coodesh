@@ -15,7 +15,7 @@ const makeSut = (): sutTypes => {
     }
 }
 describe('listArticlesById', () => {
-    it("shoud call bookRepository with corrects params", async () => {
+    it("shoud call articleRepository with corrects params", async () => {
         const { sut } = makeSut()
         const result = await sut.execute(14167)
         expect(result).toEqual(

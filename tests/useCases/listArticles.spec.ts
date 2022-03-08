@@ -6,7 +6,7 @@ const makeSut = (): ListArticles => {
     return new ListArticles(articlesRepositoryStub)
 }
 describe('listArticles', () => {
-    it("shoud call bookRepository with corrects params", async () => {
+    it("shoud call articleRepository with corrects params", async () => {
         const listArticlesUseCase = makeSut()
         const result = await listArticlesUseCase.execute()
         expect(result[0]).toEqual(

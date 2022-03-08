@@ -15,7 +15,7 @@ const makeSut = (): sutTypes => {
     }
 }
 describe('UpdateArticlesById', () => {
-    it("shoud call bookRepository with corrects params", async () => {
+    it("shoud call articleRepository with corrects params", async () => {
         const { sut } = makeSut()
         const article = {
             id: 14167,
@@ -33,7 +33,7 @@ describe('UpdateArticlesById', () => {
         const result = await sut.execute(article)
         expect(result.id).toEqual(article.id)
     })
-    it('should throw BookNotFoundError if id is not found', async () => {
+    it('should throw ArticleNotFoundError if id is not found', async () => {
         const { sut, articlesRepositoryStub } = makeSut()
         const article = {
             id: 14167,

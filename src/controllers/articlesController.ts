@@ -3,10 +3,10 @@ import { DeleteArticles } from "../use-cases/articles/deleteArticles";
 import { ListArticles } from "../use-cases/articles/listArticles";
 import { ListArticlesbyId } from "../use-cases/articles/listArticlesById";
 import { UpdateArticles } from "../use-cases/articles/updateArticles";
-import { CreateArticlesDto } from "../use-cases/dto/createArticlesDto";
 import { ArticlesNotFoundError } from "../use-cases/error/articlesNotFoundError";
 import { HttpRequest, HttpResponse, HttpStatusCodes } from "./types/http";
-import {Validator} from './validator/index'
+import { Validator } from "./validator";
+
 
 export class ArticlesController {
     constructor(
@@ -15,13 +15,24 @@ export class ArticlesController {
         private updateArticles: UpdateArticles,
         private deleteArticles: DeleteArticles,
         private createArticles: CreateArticles,
+        private validator: Validator
     ) { }
 
     async create(httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
             const { body } = httpRequest
+
+            const isBodyValid = this.validator.createValidate(body)
+            if (!isBodyValid) {
+                return {
+                    httpStatusCode: HttpStatusCodes.badRequest.code,
+                    body: {
+                        message: 'Invalid fields'
+                    }
+                }
+            }
             const response = await this.createArticles.execute(body)
-            
+
             return {
                 httpStatusCode: HttpStatusCodes.created.code,
                 body: response
@@ -106,6 +117,7 @@ export class ArticlesController {
         try {
             const { id } = httpRequest.params
             const { body } = httpRequest
+
             const response = await this.updateArticles.execute({ id, ...body })
 
             return {

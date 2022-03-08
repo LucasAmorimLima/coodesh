@@ -6,7 +6,7 @@ const makeSut = (): CreateArticles => {
     return new CreateArticles(articlesRepository)
 }
 describe('CreateArticles', () => {
-    it("shoud call bookRepository with corrects params", async () => {
+    it("shoud call articleRepository with corrects params", async () => {
         const createArticlesUseCase = makeSut()
         const article = {
             id: 14167,

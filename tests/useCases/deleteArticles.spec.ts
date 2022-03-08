@@ -16,14 +16,14 @@ const makeSut = (): sutTypes => {
     }
 }
 describe('deleteArticlesById', () => {
-    it("shoud call bookRepository with corrects params", async () => {
+    it("shoud call articleRepository with corrects params", async () => {
         const { sut } = makeSut()
         const articleId = 14167 
         const result = await sut.execute(articleId)
 
         expect(result).toEqual("Article deleted successfully")
     })
-    it('should throw BookNotFoundError if id is not found', async () => {
+    it('should throw ArticleNotFoundError if id is not found', async () => {
         const { sut, articlesRepositoryStub } = makeSut()
         const articleId = 0
             
