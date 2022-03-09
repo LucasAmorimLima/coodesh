@@ -50,7 +50,7 @@ export class ArticlesController {
             const response = await this.listArticles.execute()
 
             return {
-                httpStatusCode: HttpStatusCodes.created.code,
+                httpStatusCode: HttpStatusCodes.ok.code,
                 body: response
             }
         } catch (error: any) {
