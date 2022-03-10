@@ -1,5 +1,5 @@
 export interface Articles {
-    id: number
+    id: string
     featured: boolean
     title: string
     url: string

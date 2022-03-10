@@ -8,7 +8,8 @@ const makeSut = (): ListArticles => {
 describe('listArticles', () => {
     it("shoud call articleRepository with corrects params", async () => {
         const listArticlesUseCase = makeSut()
-        const result = await listArticlesUseCase.execute()
+        const limit = 10, page = 1
+        const result = await listArticlesUseCase.execute(limit, page)
         expect(result[0]).toEqual(
             {
                 id: 14167,

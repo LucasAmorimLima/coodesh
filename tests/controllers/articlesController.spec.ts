@@ -5,6 +5,7 @@ import { CreateArticles } from "../../src/use-cases/articles/createArticles"
 import { DeleteArticles } from "../../src/use-cases/articles/deleteArticles"
 import { ListArticles } from "../../src/use-cases/articles/listArticles"
 import { ListArticlesbyId } from "../../src/use-cases/articles/listArticlesById"
+import { MessageArticles } from "../../src/use-cases/articles/messageArticles"
 import { UpdateArticles } from "../../src/use-cases/articles/updateArticles"
 import { ArticlesNotFoundError } from "../../src/use-cases/error/articlesNotFoundError"
 import { ArticlesRepositoryStub } from "../useCases/stubs/articlesRepositoryStub"
@@ -17,6 +18,7 @@ type sutTypes = {
     updateArticles: UpdateArticles
     createArticles: CreateArticles
     deleteArticles: DeleteArticles
+    messageArticles: MessageArticles
     validator: ValidatorStub
 }
 const makeSut = (): sutTypes => {
@@ -26,8 +28,9 @@ const makeSut = (): sutTypes => {
     const updateArticles = new UpdateArticles(articlesRepository)
     const createArticles = new CreateArticles(articlesRepository)
     const deleteArticles = new DeleteArticles(articlesRepository)
+    const messageArticles = new MessageArticles
     const validator = new ValidatorStub()
-    const sut = new ArticlesController(listArticles, listArticlesById, updateArticles, deleteArticles, createArticles, validator)
+    const sut = new ArticlesController(listArticles, listArticlesById, updateArticles, deleteArticles, createArticles, messageArticles, validator)
 
     return {
         sut,
@@ -36,6 +39,7 @@ const makeSut = (): sutTypes => {
         updateArticles,
         createArticles,
         deleteArticles,
+        messageArticles,
         validator
     }
 
@@ -47,7 +51,6 @@ describe('ArticleController', () => {
             const { sut } = makeSut()
             const httpRequest = {
                 body: {
-                    id: 14167,
                     title: "SpaceX worked for weeks to begin Starlink service in Ukraine",
                     url: "https://spacenews.com/spacex-worked-for-weeks-to-begin-starlink-service-in-ukraine/",
                     imageUrl: "https://spacenews.com/wp-content/uploads/2021/08/36ss-shotwell.jpg",
@@ -72,7 +75,6 @@ describe('ArticleController', () => {
 
             const httpRequest = {
                 body: {
-                    id: "string",
                     title: "",
                     url: "",
                     imageUrl: 123,
@@ -111,6 +113,7 @@ describe('ArticleController', () => {
             const { sut } = makeSut()
             const httpRequest = {
                 body: {
+                    id: 14167,
                     title: "SpaceX worked for weeks to begin Starlink service in Ukraine",
                     url: "https://spacenews.com/spacex-worked-for-weeks-to-begin-starlink-service-in-ukraine/",
                     imageUrl: "https://spacenews.com/wp-content/uploads/2021/08/36ss-shotwell.jpg",
@@ -271,9 +274,15 @@ describe('ArticleController', () => {
         })
     })
     describe('list', () => {
-        it("should call ListBook with correct parameters", async () => {
+        it("should call ListArticle with correct parameters", async () => {
             const { sut } = makeSut()
-            const httpResponse = await sut.index()
+            const httpRequest = {
+                query: {
+                    limit: 2,
+                    page: 1
+                }
+            }
+            const httpResponse = await sut.index(httpRequest)
 
             expect(httpResponse.body[0]).toEqual(
                 {
@@ -295,11 +304,26 @@ describe('ArticleController', () => {
         it('should throw server error if usecase throws', async () => {
             const { sut, listArticles } = makeSut()
             jest.spyOn(listArticles, 'execute').mockReturnValueOnce(Promise.reject(new ServerError('Internal Server Error')))
-            
-            const httpResponse = await sut.index()
+            const httpRequest = {
+                query: {
+                    limit: 2,
+                    page: 1
+                }
+            }
+            const httpResponse = await sut.index(httpRequest)
             expect(httpResponse.httpStatusCode).toEqual(HttpStatusCodes.serverError.code)
             expect(httpResponse.body).toEqual('Internal Server Error')
         })
     })
 
+    describe('list', () => {
+        it("should call MessageArticles with correct parameters", async () => {
+            const { sut } = makeSut()
+            const httpResponse = await sut.message()
+
+            expect(httpResponse.body).toEqual("Back-end Challenge 2021 🏅 - Space Flight News")
+            expect(httpResponse.httpStatusCode).toEqual(HttpStatusCodes.ok.code)
+        })
+       
+    })
 })

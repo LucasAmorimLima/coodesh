@@ -9,12 +9,14 @@ export class ArticlesRepositoryMongoose implements ArticlesRepository {
 
         return newArticle
     }
-    async list(): Promise<Articles[]> {
+    async list(page: number, limit: number): Promise<Articles[]> {
         const articles = await articlesModel.find()
+            .limit(limit)
+            .skip((page - 1) * limit)
 
         return articles
     }
-    async listById(id: number): Promise<Articles> {
+    async listById(id: string): Promise<Articles> {
         const article = await articlesModel.findById(id)
 
         return article
@@ -26,7 +28,7 @@ export class ArticlesRepositoryMongoose implements ArticlesRepository {
 
         return updatedBook
     }
-    async delete(id: number): Promise<string> {
+    async delete(id: string): Promise<string> {
         await articlesModel.findByIdAndDelete(id)
 
         return `Article with id ${id} deleted`

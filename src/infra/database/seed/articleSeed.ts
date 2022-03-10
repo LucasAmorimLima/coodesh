@@ -1,3 +1,4 @@
+import { omit } from 'lodash';
 import { MongoClient } from 'mongodb'
 import { exit } from 'process';
 import api from '../../axios/configAxios'
@@ -9,10 +10,19 @@ async function seed() {
     try {
         await client.connect();
         const collection = client.db("coodesh").collection("articles")
-        const response = await api.get('/articles');
-        const { data } = response
+        
+        collection.drop()
+        const response = await (await api.get('/articles')).data;
 
-        collection.insertMany(data); 
+        const dataWhithoutId: any = response.map((itens: any)=>{
+            return {
+                ...omit(itens, "id"),
+                customId: itens.id
+            }
+        })
+
+        await collection.insertMany(dataWhithoutId);
+    
         exit()
     } catch (err: any) {
         console.log(err);

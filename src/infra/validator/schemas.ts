@@ -3,6 +3,7 @@ import Joi from "joi"
 export const Schema  = {
     createSchema: Joi.object(
         {
+            summary: Joi.string().required(),
             featured: Joi.boolean().required(),
             title: Joi.string().required(),
             url: Joi.string().required(),
@@ -11,14 +12,14 @@ export const Schema  = {
             publishedAt: Joi.string().required(),
             launches: Joi.array().items(
                 {
-                    id: Joi.string().required(),
-                    provider: Joi.string().required()
+                    id: Joi.string(),
+                    provider: Joi.string()
                 }
             ),
             events: Joi.array().items(
                 {
-                    id: Joi.string().required(),
-                    provider: Joi.string().required()
+                    id: Joi.string(),
+                    provider: Joi.string()
                 }
             )
         }

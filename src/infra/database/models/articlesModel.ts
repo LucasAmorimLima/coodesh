@@ -1,10 +1,10 @@
+
 import mongoose from 'mongoose'
 
 const articleSchema = new mongoose.Schema(
     {
-        id: {
+        customId: {
             type: Number,
-            required: true
         },
         featured: {
             type: Boolean
@@ -49,5 +49,4 @@ const articleSchema = new mongoose.Schema(
         ]
     }
 )
-
 export const articlesModel = mongoose.model('articles', articleSchema)

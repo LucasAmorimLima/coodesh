@@ -8,7 +8,7 @@ export class CreateArticles {
     ) {}
     async execute(article: CreateArticlesDto): Promise<Articles>{
         const newArticle  = await this.articlesRepository.create(article)
-
+        
         return newArticle
     }
 }

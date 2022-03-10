@@ -5,7 +5,8 @@ export class ListArticles {
     constructor(
         private readonly articlesRepository: ArticlesRepository
     ) { }
-    async execute(): Promise<Articles[]> {
-        return await this.articlesRepository.list()
+    async execute(page: number, limit: number): Promise<Articles[]> {
+
+        return await this.articlesRepository.list(page, limit)
     }
 }
