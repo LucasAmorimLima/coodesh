@@ -6,6 +6,9 @@ const articleSchema = new mongoose.Schema(
         customId: {
             type: Number,
         },
+        updatedAt: {
+            type: String,
+        },
         featured: {
             type: Boolean
         },
