@@ -3,6 +3,12 @@ import mongoose from 'mongoose'
 
 const articleSchema = new mongoose.Schema(
     {
+        _id: {
+            type: Number
+        },
+        seq:{
+            type: Number
+        },
         customId: {
             type: Number,
         },

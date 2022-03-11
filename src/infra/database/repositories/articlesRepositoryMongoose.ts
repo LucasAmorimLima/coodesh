@@ -5,7 +5,10 @@ import { articlesModel } from '../models/articlesModel'
 
 export class ArticlesRepositoryMongoose implements ArticlesRepository {
     async create(articles: CreateArticlesDto): Promise<Articles> {
-        const newArticle = await articlesModel.create(articles)
+        const newArticle = await articlesModel.create({
+            _id: await getNextSequence(),
+            ...articles,
+        })
 
         return newArticle
     }
@@ -16,7 +19,7 @@ export class ArticlesRepositoryMongoose implements ArticlesRepository {
 
         return articles
     }
-    async listById(id: string): Promise<Articles> {
+    async listById(id: number): Promise<Articles> {
         const article = await articlesModel.findById(id)
 
         return article
@@ -28,9 +31,20 @@ export class ArticlesRepositoryMongoose implements ArticlesRepository {
 
         return updatedBook
     }
-    async delete(id: string): Promise<string> {
+    async delete(id: number): Promise<string> {
         await articlesModel.findByIdAndDelete(id)
 
         return `Article with id ${id} deleted`
     }
+}
+
+export async function getNextSequence() {
+    const ret = await articlesModel.findOneAndUpdate(
+        { _id: 0 },
+        { $inc: { seq: 1 } },
+        {
+            new: true
+        }
+    );
+    return ret.seq;
 }

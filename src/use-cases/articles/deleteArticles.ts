@@ -6,7 +6,7 @@ export class DeleteArticles {
     constructor(
         private articlesRepository : ArticlesRepository
     ) { }
-    async execute(id: string): Promise<string>{
+    async execute(id: number): Promise<string>{
         const article = await this.articlesRepository.listById(id)
         if (!article) {
             throw new ArticlesNotFoundError("Article not found")
