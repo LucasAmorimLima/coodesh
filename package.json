@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
-    "cron": "ts-node src/cron.ts",
-    "test": "jest",
-    "seed": "ts-node src/infra/database/seed/articleSeed.ts"
+    "test": "jest"
   },
   "keywords": [],
   "author": "Lucas Amorim Lima",
