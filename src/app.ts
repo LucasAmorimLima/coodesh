@@ -8,5 +8,5 @@ mongooseConnect()
 const app = express()
 app.use(json())
 app.use(articles)
-schedule("* * * * *",cronJob)
+schedule("0 6 * * *",cronJob)
 export default app
