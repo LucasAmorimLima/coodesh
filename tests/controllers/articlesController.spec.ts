@@ -316,7 +316,7 @@ describe('ArticleController', () => {
         })
     })
 
-    describe('list', () => {
+    describe('message', () => {
         it("should call MessageArticles with correct parameters", async () => {
             const { sut } = makeSut()
             const httpResponse = await sut.message()

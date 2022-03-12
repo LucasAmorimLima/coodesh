@@ -1,5 +1,6 @@
 
 import mongoose from 'mongoose'
+import { IArticles } from './IArticleModel'
 
 const articleSchema = new mongoose.Schema(
     {
@@ -58,4 +59,4 @@ const articleSchema = new mongoose.Schema(
         ]
     }
 )
-export const articlesModel = mongoose.model('articles', articleSchema)
+export const articlesModel = mongoose.model<IArticles>('articles', articleSchema)

@@ -2,7 +2,7 @@ import { omit } from 'lodash';
 import { MongoClient } from 'mongodb'
 import { exit } from 'process';
 import api from '../../axios/configAxios'
-import moment from 'moment'
+
 async function seed() {
     const uri = "mongodb+srv://adm:1d494E7E@cluster0.i0zjh.mongodb.net/";
     const client = new MongoClient(uri);

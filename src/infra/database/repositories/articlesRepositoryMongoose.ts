@@ -19,18 +19,18 @@ export class ArticlesRepositoryMongoose implements ArticlesRepository {
 
         return articles
     }
-    async listById(id: number): Promise<Articles> {
+    async listById(id: number): Promise<Articles | null> {
         const article = await articlesModel.findById(id)
 
         return article
     }
-    async update(articles: Articles): Promise<Articles> {
+    async update(articles: Articles): Promise<Articles | null> {
         const updatedBook = await articlesModel.findOneAndUpdate({ _id: articles.id }, articles, {
             new: true
         })
 
         return updatedBook
-    }
+    } 
     async delete(id: number): Promise<string> {
         await articlesModel.findByIdAndDelete(id)
 
@@ -46,5 +46,5 @@ export async function getNextSequence() {
             new: true
         }
     );
-    return ret.seq;
+   if(ret) return ret.seq;
 }

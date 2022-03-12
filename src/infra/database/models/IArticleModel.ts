@@ -1,5 +1,7 @@
-export interface Articles {
-    id: number
+export interface IArticles {
+    id: Number
+    seq: Number
+    customId: number
     featured: boolean
     title: string
     url: string
