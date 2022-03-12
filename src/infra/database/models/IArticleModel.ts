@@ -8,6 +8,7 @@ export interface IArticles {
     imageUrl: string
     newsSite: string
     summary: string
+    updatedAt: string
     publishedAt: string
     launches: launches[]
     events: events[]

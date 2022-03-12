@@ -4,7 +4,7 @@ import { articlesModel } from '../database/models/articlesModel'
 
 export async function dataForTheCron() {
     let verify: number[] = []
-    const response = await (await api.get('/')).data
+    const response = await (await api.get('/articles')).data
     const articlesFromApi = response.map((itens: any) => {
         return {
             ...omit(itens, "id"),

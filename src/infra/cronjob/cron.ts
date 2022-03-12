@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { articlesModel } from '../database/models/articlesModel'
 import { getNextSequence } from '../database/repositories/articlesRepositoryMongoose'
 import { dataForTheCron } from './dataForTheCron'
@@ -29,10 +30,15 @@ export const cronJob = async () => {
                 }
             })
         }
+
         articles.map(async (itens) => {
             for (let index = 0; index < articlesFromApi.length; index++) {
                 if (itens.customId === articlesFromApi[index]) {
-                    await articlesModel.updateOne({ customId: articlesFromApi[index] }, { ...articlesFromApi[index] })
+                    const apiDate = moment(articlesFromApi[index].updatedAt)
+                    const databaseDate = moment(itens.updatedAt)
+                    if (databaseDate < apiDate) {
+                        await articlesModel.updateOne({ customId: articlesFromApi[index] }, { ...articlesFromApi[index] })
+                    }    
                 }
             }
         })

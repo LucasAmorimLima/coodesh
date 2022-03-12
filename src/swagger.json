@@ -1,0 +1,287 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API do Challenger Coodesh",
+        "description": "",
+        "termsOfService": "",
+        "contact": {
+            "email": "lucasamorimlima17@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3333/",
+            "description": "API de test"
+        }
+    ],
+    "paths": {
+        "/articles": {
+            "post": {
+                "summary": "Dados dos Articles",
+                "description": "Rota responsável por inserir os dados",
+                "tags": [
+                    "Articles"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Articles"
+                            },
+                            "examples": {
+                                "Articles": {
+                                    "value": {
+                                        "title": "New",
+                                        "url": "https://spacenews.com/spacex-worked-for-weeks-to-begin-starlink-service-in-ukraine/",
+                                        "imageUrl": "https://spacenews.com/wp-content/uploads/2021/08/36ss-shotwell.jpg",
+                                        "newsSite": "SpaceNews",
+                                        "summary": "SpaceX's president says the company had been working for weeks to secure approval for Starlink services in Ukraine before a government minister tweeted a request to Elon Musk.",
+                                        "publishedAt": "2022-03-08T10:44:06.000Z",
+                                        "featured": false,
+                                        "launches": [],
+                                        "events": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Articles"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Dados dos Articles",
+                "description": "Rota responsável por exibir os dados dos articles",
+                "tags": [
+                    "Articles"
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limite de itens para busca",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Página da busca",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "itens": {
+                                        "$ref": "#/components/schemas/Articles"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/articles/{id}": {
+            "get": {
+                "summary": "Busca dados dos Articles pelo id",
+                "description": "Rota responsável por exibir os dados dos articles pelo id",
+                "tags": [
+                    "Articles"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do article",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Articles"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "Apagando um article",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "article id para apagar",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "example":{
+                                        "response": "Article deleted successfully"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Altera o article pelo id",
+                "description": "Altera o article pelo id",
+                "tags": [
+                    "Articles"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "id do article para busca",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Articles"
+                            },
+                            "examples": {
+                                "Places": {
+                                    "value": {
+                                        "title": "update",
+                                        "url": "https://www.teslarati.com/spacex-starlink-launch-falcon-heavy-booster-reuse/",
+                                        "imageUrl": "https://www.teslarati.com/wp-content/uploads/2022/03/CSG-2-Arabsat-6A-Starlink-4-10-Falcon-B1052-Richard-Angle-USAF-SpaceX-1-c.jpg",
+                                        "newsSite": "Teslarati",
+                                        "summary": "SpaceX has reflown a converted Falcon Heavy side booster just 37 days after its first mission as a Falcon 9 rocket, successfully...",
+                                        "publishedAt": "2022-03-10T12:04:22.000Z",
+                                        "updatedAt": "2022-03-10T12:04:29.983Z",
+                                        "featured": false,
+                                        "launches": [],
+                                        "events": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "example":{
+                                        "title": "update",
+                                        "url": "https://www.teslarati.com/spacex-starlink-launch-falcon-heavy-booster-reuse/",
+                                        "imageUrl": "https://www.teslarati.com/wp-content/uploads/2022/03/CSG-2-Arabsat-6A-Starlink-4-10-Falcon-B1052-Richard-Angle-USAF-SpaceX-1-c.jpg",
+                                        "newsSite": "Teslarati",
+                                        "summary": "SpaceX has reflown a converted Falcon Heavy side booster just 37 days after its first mission as a Falcon 9 rocket, successfully...",
+                                        "publishedAt": "2022-03-10T12:04:22.000Z",
+                                        "updatedAt": "2022-03-10T12:04:29.983Z",
+                                        "featured": false,
+                                        "launches": [],
+                                        "events": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Articles": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "featured": {
+                        "type": "boolean"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "imageUrl": {
+                        "type": "string"
+                    },
+                    "newsSite": {
+                        "type": "string"
+                    },
+                    "summary": {
+                        "type": "string"
+                    },
+                    "publishedAt": {
+                        "type": "string"
+                    },
+                    "launches": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "provider": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "events": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "provider": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
